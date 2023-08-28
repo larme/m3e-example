@@ -24,7 +24,7 @@ def get_m3e_embeddings(sentences: list | str):
     print(embeddings)
     return embeddings
 
-svc = bentoml.service("m3e-embedding-svc", runners=[])
+svc = bentoml.Service("m3e-embedding-svc", runners=[])
 
 @svc.api(input=JSON(), output=NumpyNdarray())
 def embeddings(json_dict):
