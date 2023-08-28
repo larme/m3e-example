@@ -1,0 +1,3 @@
+bentoml
+transformers
+sentence_transformers
