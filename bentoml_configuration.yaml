@@ -1,0 +1,5 @@
+runners:
+  m3e_runner:
+    resources:
+      nvidia.com/gpu: [0]
+    workers_per_resource: 10
