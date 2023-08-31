@@ -31,14 +31,16 @@ class M3eRunnable(bentoml.Runnable):
         else:
             self.model.cpu()
 
-    @bentoml.Runnable.method(batchable=True, batch_dim=0)
+    # disable batching for small traffic
+    # @bentoml.Runnable.method(batchable=True, batch_dim=0)
+    @bentoml.Runnable.method(batchable=False)
     def embeddings(self, sentences):
         embeddings = self.model.encode(sentences, normalize_embeddings=True)
         return embeddings
 
-m3e_runner = bentoml.Runner(M3eRunnable, embedded=False)
+m3e_runner = bentoml.Runner(M3eRunnable, embedded=False, name="m3e_runner")
 
-svc = bentoml.Service("m3e-embedding-svc", runners=[m3e_runner])
+svc = bentoml.Service("m3e-svc", runners=[m3e_runner])
 
 @svc.api(input=JSON(), output=NumpyNdarray())
 def embeddings(json_dict):
