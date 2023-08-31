@@ -1,3 +1,4 @@
 bentoml
 transformers
 sentence_transformers
+pydantic
