@@ -53,8 +53,8 @@ def embeddings(json_dict):
 
 
 class RankArgs(BaseModel):
-    queries: str | t.List[str]
-    passages: str | t.List[str]
+    queries: t.Union[str, t.List[str]]
+    passages: t.Union[str, t.List[str]]
     topk: int
 
 sample_rank_input = RankArgs(
